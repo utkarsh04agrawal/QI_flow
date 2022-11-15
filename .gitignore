@@ -1,1 +1,3 @@
 *.pdf
+/Haar_2_replica/data/*
+!README.md
