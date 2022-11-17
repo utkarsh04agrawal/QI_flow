@@ -155,7 +155,7 @@ def load_bit_state(L,depth,q,BC='up'):
     return state
     
 ## function to get free energy when the strength of coupling between S and ancillas is same everywhere
-def free_energy_uniform(state: State, depth,ancilla_array : np.ndarray):
+def free_energy_uniform(state: State, depth,ancilla_array : np.ndarray, intermediate_time=False):
     
     """
     ancilla_string is a list whose elements are string of length L//2. For the element 't','k','h', the transfer matrix corresponding to having the ancilla traced out, kept in system, no ancilla respectively are applied. 
@@ -184,6 +184,9 @@ def free_energy_uniform(state: State, depth,ancilla_array : np.ndarray):
         state.log_Z.append(np.log(sd))
         state.data = state.data/sd
         # print(time.time()-start)
+        if intermediate_time:
+            top_layer_factor.append(TopLayer(state,no_of_downs))
+    if not intermediate_time:
         top_layer_factor.append(TopLayer(state,no_of_downs))
     
 
