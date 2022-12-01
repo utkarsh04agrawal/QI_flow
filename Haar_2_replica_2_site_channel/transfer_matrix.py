@@ -52,6 +52,8 @@ def oddtransfer(State,a_structure):
     os = np.reshape(os,(2,)*L)
     os = np.moveaxis(os,-1,0)
     State.data = os
+
+
 def no_of_down_spins(N):
     temp = np.arange(0,2**N,1,dtype=int)
     no_of_ones = np.zeros(2**N,dtype=float)
@@ -70,6 +72,8 @@ def TopLayer(state,no_of_downs):
     fac = np.sum(state.data.reshape(2**state.L)*((state.q)**(no_of_downs-(state.L)//2)))
     
     return np.log(fac)
+
+
 def get_U_haar(q):
     U = np.zeros((4,4))
     U[0,0] = 1
@@ -105,6 +109,8 @@ def get_U_k(p,q):
     U[3,2] = p**2*q/(q**2+1)
     U[3,1] = p**2*q/(q**2+1)
     return U
+
+
 def encoded_bit_state(L,depth,q,BC='up'): 
     """
     This function evolves a single LOCAL bell pair to global bit by evolving by Haar dynamics. BC specify whether the initial boundary condition of the bell pair is 'up' or 'down' corresponding to Identity or Swap permutation respectively.
@@ -154,6 +160,7 @@ def load_bit_state(L,depth,q,BC='up'):
     
     return state
     
+
 ## function to get free energy when the strength of coupling between S and ancillas is same everywhere
 def free_energy_uniform(state: State, depth,ancilla_array : np.ndarray, intermediate_time=False):
     
@@ -163,7 +170,7 @@ def free_energy_uniform(state: State, depth,ancilla_array : np.ndarray, intermed
     p = state.p
     q = state.q
     L = state.L
-    assert np.shape(ancilla_array) == (depth,L)
+    assert np.shape(ancilla_array) == (depth,L//2)
     
     top_layer_factor = []
     ##

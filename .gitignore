@@ -1,4 +1,4 @@
 *.pdf
-/Haar_2_replica/data/*
+*encoded_bell_pairs
 !README.md
 __pycache__
